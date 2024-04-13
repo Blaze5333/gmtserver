@@ -3,8 +3,6 @@ const app=express()
 const bodyParser=require('body-parser')
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json())
-const { google } = require('googleapis');
-const calendar = google.calendar('v3');
 require('dotenv').config()
 const otpGenerator=require('otp-generator')
 const nodemailer=require('nodemailer')
