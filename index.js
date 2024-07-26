@@ -15,12 +15,12 @@ app.post('/generateOtp',async(req,res)=>{
     const transport=nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: process.env.EMAIL,
+        user:"do-not-reply@doklink.in",
         pass: process.env.EMAIL_PASSWORD
       }
     })
     const mailOptions={
-      from:process.env.EMAIL,
+      from:"do-not-reply@doklink.in",
       to:email,
       subject: 'Here is your one-time-password',
     text: `Here's the one-time verification code you requested ${otp}.This code expires after 9 minutes`
