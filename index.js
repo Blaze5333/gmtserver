@@ -10,18 +10,18 @@ const port=process.env.PORT || 3000
 app.post('/generateOtp',async(req,res)=>{
   try {
     const {email}=req.body
-    console.log("email",email,"emailPass",process.env.EMAIL_PASSWORD)
+    console.log("email",email,"emailPass",process.env.EMAIL_PASSWORD,"email",process.env.EMAIL)
     const otp=otpGenerator.generate(4,{specialChars:false,lowerCaseAlphabets:false,upperCaseAlphabets:false,digits:true})
     console.log("otp",otp)
     const transport=nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user: 'do-not-reply@doklink.in',
+        user: process.env.EMAIL,
         pass: process.env.EMAIL_PASSWORD
       }
     })
     const mailOptions={
-      from:'do-not-reply@doklink.in',
+      from:process.env.EMAIL,
       to:email,
       subject: 'Here is your one-time-password',
     text: `Here's the one-time verification code you requested ${otp}.This code expires after 9 minutes`
