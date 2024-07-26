@@ -7,6 +7,8 @@ require('dotenv').config()
 const otpGenerator=require('otp-generator')
 const nodemailer=require('nodemailer')
 const port=process.env.PORT || 3000
+const cors=require('cors')
+app.use(cors())
 app.post('/generateOtp',async(req,res)=>{
   try {
     const {email}=req.body
