@@ -6,6 +6,7 @@ app.use(express.json())
 require('dotenv').config()
 const otpGenerator=require('otp-generator')
 const nodemailer=require('nodemailer')
+const port=process.env.PORT || 3000
 app.post('/generateOtp',async(req,res)=>{
   try {
     const {email}=req.body
@@ -15,19 +16,19 @@ app.post('/generateOtp',async(req,res)=>{
     const transport=nodemailer.createTransport({
       service: 'Gmail',
       auth: {
-        user:"mustafachaiwala2003@gmail.com",
+        user: 'mustafachaiwala2003@gmail.com',
         pass: process.env.EMAIL_PASSWORD
       }
     })
     const mailOptions={
-      from:"mustafachaiwala2003@gmail.com",
+      from:'mustafachaiwala2003@gmail.com',
       to:email,
       subject: 'Here is your one-time-password',
     text: `Here's the one-time verification code you requested ${otp}.This code expires after 9 minutes`
     }
     transport.sendMail(mailOptions,(error,info)=>{
       if(error){
-        res.send({error:error})
+        console.log(error)
       }else{
         console.log('Email sent: ' + info.response);
         res.send({message:'otp sent successfully',otp:otp})
@@ -46,6 +47,6 @@ app.post('/generateOtp',async(req,res)=>{
 })
 
 
-app.listen(3000,()=>{
-    console.log('lidtening on 3000')
+app.listen(port,()=>{
+    console.log('listening on 3000')
 })
