@@ -10,9 +10,9 @@ const port=process.env.PORT || 3000
 app.post('/generateOtp',async(req,res)=>{
   try {
     const {email}=req.body
-    console.log("email",email,"emailPass",process.env.EMAIL_PASSWORD,"email",process.env.EMAIL)
+    
     const otp=otpGenerator.generate(4,{specialChars:false,lowerCaseAlphabets:false,upperCaseAlphabets:false,digits:true})
-    console.log("otp",otp)
+    
     const transport=nodemailer.createTransport({
       service: 'Gmail',
       auth: {
