@@ -11,11 +11,7 @@ const cors=require('cors')
 app.use(cors())
 app.post('/generateOtp',async(req,res)=>{
   try {
-    console.log("webhook request",req.body)
-    res.json({
-      "success":true
-    })
-    return
+   
     const {email}=req.body
     
     const otp=otpGenerator.generate(4,{specialChars:false,lowerCaseAlphabets:false,upperCaseAlphabets:false,digits:true})
